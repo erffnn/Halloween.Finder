@@ -11,7 +11,7 @@ public class HostHomePage extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_host_home_page);
+        setContentView(R.layout.main_host_home);
 
     }
 }

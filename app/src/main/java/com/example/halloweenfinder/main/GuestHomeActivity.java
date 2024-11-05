@@ -11,7 +11,7 @@ public class GuestHomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_guest_home);
+        setContentView(R.layout.main_guest_home);
 
     }
 }
