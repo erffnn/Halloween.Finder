@@ -61,6 +61,6 @@ public class PartyListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_party_list, container, false);
+        return inflater.inflate(R.layout.guest_party_list_fr, container, false);
     }
 }
