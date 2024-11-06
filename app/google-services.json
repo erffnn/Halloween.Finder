@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "769285829446",
+    "project_id": "halloween-finder-bbd82",
+    "storage_bucket": "halloween-finder-bbd82.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:769285829446:android:8ca28959daf9d50f796b47",
+        "android_client_info": {
+          "package_name": "com.example.halloweenfinder"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDyUE6uyoIr4U7yLgvfNJHNN1uOoEr32zc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
