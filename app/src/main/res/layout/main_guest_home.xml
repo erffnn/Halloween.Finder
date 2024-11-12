@@ -1,10 +1,121 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".main.GuestHomeActivity">
+    android:orientation="vertical">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <FrameLayout
+        android:id="@+id/fragmentContainer"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <LinearLayout
+        android:id="@+id/customNavBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:background="?attr/colorPrimary">
+
+        <LinearLayout
+            android:id="@+id/partyListButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <ImageView
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:src="@drawable/logo"
+                android:contentDescription="Party List" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Parties"
+                android:textColor="@android:color/white"
+                android:textSize="12sp"
+                android:paddingTop="4dp"
+                android:fontFamily="sans-serif-medium"
+                android:letterSpacing="0.05" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/reviewButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <ImageView
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:src="@drawable/logo"
+                android:contentDescription="Reviews" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Reviews"
+                android:textColor="@android:color/white"
+                android:textSize="12sp"
+                android:paddingTop="4dp"
+                android:fontFamily="sans-serif-medium"
+                android:letterSpacing="0.05" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/conversationRoomButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <ImageView
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:src="@drawable/conversation_room_logo"
+                android:contentDescription="Conversation Room" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Chat"
+                android:textColor="@android:color/white"
+                android:textSize="12sp"
+                android:paddingTop="4dp"
+                android:fontFamily="sans-serif-medium"
+                android:letterSpacing="0.05" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/mapButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <ImageView
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:src="@drawable/map_logo"
+                android:contentDescription="Map" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Map"
+                android:textColor="@android:color/white"
+                android:textSize="12sp"
+                android:paddingTop="4dp"
+                android:fontFamily="sans-serif-medium"
+                android:letterSpacing="0.05" />
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>

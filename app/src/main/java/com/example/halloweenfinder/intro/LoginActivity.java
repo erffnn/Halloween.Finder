@@ -13,6 +13,7 @@ import com.example.halloweenfinder.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+
 public class LoginActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
