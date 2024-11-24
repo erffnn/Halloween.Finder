@@ -38,6 +38,7 @@ dependencies {
     // Import the Firebase BoM (Bill of Materials)
     implementation(platform("com.google.firebase:firebase-bom:33.5.1"))
 
+
     // Add the Firebase Authentication SDK
     implementation("com.google.firebase:firebase-auth")
 

@@ -29,7 +29,7 @@
             <ImageView
                 android:layout_width="28dp"
                 android:layout_height="28dp"
-                android:src="@drawable/logo"
+                android:src="@drawable/parties_logo"
                 android:contentDescription="Party List" />
             <TextView
                 android:layout_width="wrap_content"
@@ -54,7 +54,7 @@
             <ImageView
                 android:layout_width="28dp"
                 android:layout_height="28dp"
-                android:src="@drawable/logo"
+                android:src="@drawable/review_page"
                 android:contentDescription="Reviews" />
             <TextView
                 android:layout_width="wrap_content"
