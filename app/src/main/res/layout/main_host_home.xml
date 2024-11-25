@@ -55,8 +55,9 @@
             <ImageView
                 android:layout_width="28dp"
                 android:layout_height="28dp"
-                android:src="@drawable/party_creation_logo"
-                android:contentDescription="Party Creation" />
+                android:contentDescription="Party Creation"
+                android:src="@drawable/party_creation_logo" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
