@@ -1,4 +1,4 @@
-package adapters;
+package com.example.halloweenfinder.adapters;
 
 import android.view.LayoutInflater;
 import android.view.View;
