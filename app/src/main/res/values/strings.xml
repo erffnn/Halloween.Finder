@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">HalloweenFinder</string>
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="my_map_api_key">AIzaSyCjj8jXqvGfrcmXCe2vJNJqHveTst8BHUA</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
