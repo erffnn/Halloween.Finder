@@ -21,7 +21,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-import adapters.PartyAdapter;
+import com.example.halloweenfinder.adapters.PartyAdapter;
 import models.Party;
 
 public class PartyListFragment extends Fragment {
