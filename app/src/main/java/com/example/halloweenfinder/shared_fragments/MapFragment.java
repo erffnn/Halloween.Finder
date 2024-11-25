@@ -50,10 +50,4 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         // Required empty public constructor
     }
 
-    public static MapFragment newInstance(String param1, String param2) {
-        MapFragment fragment = new MapFragment();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-        return fragment;
-    }
 }
