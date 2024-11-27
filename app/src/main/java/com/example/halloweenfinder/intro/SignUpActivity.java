@@ -13,6 +13,11 @@ import com.example.halloweenfinder.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import java.util.HashMap;
+import java.util.Map;
+
 public class SignUpActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
@@ -44,6 +49,31 @@ public class SignUpActivity extends AppCompatActivity {
             finish(); // Optionally finish this activity to prevent users from navigating back
         });
     }
+    private void saveUserToDatabase(FirebaseUser user) {
+        String userId = user.getUid(); // Get the user's unique ID
+        String name = emailEditText.getText().toString().split("@")[0]; // Extract name from email as an example
+        Map<String, Object> parties = new HashMap<>(); // Initial empty map of parties
+
+        // Create a user data map
+        Map<String, Object> userData = new HashMap<>();
+        userData.put("userId", userId);
+        userData.put("name", name);
+        userData.put("parties", parties);
+
+        // Reference to the Realtime Database
+        DatabaseReference databaseRef = FirebaseDatabase.getInstance().getReference("users");
+
+        // Save user data
+        databaseRef.child(userId).setValue(userData)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        Toast.makeText(this, "User data saved successfully!", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(this, "Failed to save user data: " + task.getException().getMessage(),
+                                Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
 
     private void registerUser() {
         String email = emailEditText.getText().toString().trim();
@@ -66,6 +96,7 @@ public class SignUpActivity extends AppCompatActivity {
                         // Registration success, update UI with the signed-in user's information
                         FirebaseUser user = mAuth.getCurrentUser();
                         if (user != null) {
+                            saveUserToDatabase(user);
                             // Navigate to the main home activity
                             Intent intent = new Intent(SignUpActivity.this, GuestHomeActivity.class); // Replace with the correct home activity
                             startActivity(intent);
