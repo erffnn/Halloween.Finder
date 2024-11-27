@@ -1,0 +1,148 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <FrameLayout
+        android:id="@+id/fragmentContainer"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <LinearLayout
+        android:id="@+id/customNavBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:background="?attr/colorPrimary">
+
+        <LinearLayout
+            android:id="@+id/hostProfileButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <ImageView
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:src="@drawable/prfile_logi"
+                android:contentDescription="Host Profile" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Profile"
+                android:textColor="@android:color/white"
+                android:textSize="12sp"
+                android:paddingTop="4dp"
+                android:fontFamily="sans-serif-medium"
+                android:letterSpacing="0.05" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/partyCreationButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="1dp">
+
+            <ImageView
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:contentDescription="Party Creation"
+                android:src="@drawable/party_creation_logo" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Create party"
+                android:textColor="@android:color/white"
+                android:textSize="12sp"
+                android:paddingTop="4dp"
+                android:fontFamily="sans-serif-medium"
+                android:letterSpacing="0.05" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/guestsListButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <ImageView
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:src="@drawable/guests_logo"
+                android:contentDescription="Guests List" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Guests"
+                android:textColor="@android:color/white"
+                android:textSize="12sp"
+                android:paddingTop="4dp"
+                android:fontFamily="sans-serif-medium"
+                android:letterSpacing="0.05" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/conversationRoomButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <ImageView
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:src="@drawable/conversation_room_logo"
+                android:contentDescription="Conversation Room" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Chat"
+                android:textColor="@android:color/white"
+                android:textSize="12sp"
+                android:paddingTop="4dp"
+                android:fontFamily="sans-serif-medium"
+                android:letterSpacing="0.05" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/mapButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <ImageView
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:src="@drawable/map_logo"
+                android:contentDescription="Map" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Map"
+                android:textColor="@android:color/white"
+                android:textSize="12sp"
+                android:paddingTop="4dp"
+                android:fontFamily="sans-serif-medium"
+                android:letterSpacing="0.05" />
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>
