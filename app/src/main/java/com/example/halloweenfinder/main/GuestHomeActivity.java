@@ -10,7 +10,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.halloweenfinder.R;
 import com.example.halloweenfinder.guest_fragments.PartyListFragment;
-import com.example.halloweenfinder.guest_fragments.ReviewFragment;
+import com.example.halloweenfinder.guest_fragments.HistoryFragment;
 import com.example.halloweenfinder.shared_fragments.ConversationFragment;
 import com.example.halloweenfinder.shared_fragments.MapFragment;
 
@@ -44,7 +44,7 @@ public class GuestHomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                loadFragment(new ReviewFragment());
+                loadFragment(new HistoryFragment());
             }
         });
 
