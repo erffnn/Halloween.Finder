@@ -54,12 +54,12 @@
             <ImageView
                 android:layout_width="28dp"
                 android:layout_height="28dp"
-                android:src="@drawable/review_page"
-                android:contentDescription="Reviews" />
+                android:src="@drawable/history_page"
+                android:contentDescription="History" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Reviews"
+                android:text="History"
                 android:textColor="@android:color/white"
                 android:textSize="12sp"
                 android:paddingTop="4dp"
