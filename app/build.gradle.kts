@@ -35,13 +35,19 @@ android {
 }
 
 dependencies {
+    // Import the Firebase BoM (Bill of Materials)
     implementation(platform("com.google.firebase:firebase-bom:33.5.1"))
 
+
+    // Add the Firebase Authentication SDK
     implementation("com.google.firebase:firebase-auth")
 
     implementation("com.google.firebase:firebase-database-ktx")
 
-    implementation("com.google.firebase:firebase-firestore-ktx")
+
+    // Add other Firebase SDKs as needed (e.g., Realtime Database, Firestore, etc.)
+    // implementation("com.google.firebase:firebase-database")
+    // implementation("com.google.firebase:firebase-firestore")
 
     implementation("com.google.android.gms:play-services-maps:19.0.0")
 
@@ -55,4 +61,3 @@ dependencies {
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
 }
-

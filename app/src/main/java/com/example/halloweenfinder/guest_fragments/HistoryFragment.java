@@ -60,7 +60,7 @@ public class HistoryFragment extends Fragment {
                 .whereEqualTo("guestId", auth.getCurrentUser().getUid())
                 .get()
                 .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
+                    if (task.isSuccessful() && task.getResult() != null && !task.getResult().isEmpty()) {
                         partyList.clear();
                         task.getResult().forEach(document -> {
                             Party party = document.toObject(Party.class);
@@ -68,8 +68,12 @@ public class HistoryFragment extends Fragment {
                         });
                         adapter.notifyDataSetChanged();
                     } else {
-                        Toast.makeText(getContext(), "Failed to load party history", Toast.LENGTH_SHORT).show();
+                        // Show a message if no history is found
+                        Toast.makeText(getContext(), "No history found.", Toast.LENGTH_SHORT).show();
                     }
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(getContext(), "Failed to load party history: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                 });
     }
 }

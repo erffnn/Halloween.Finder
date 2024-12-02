@@ -10,7 +10,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.halloweenfinder.R;
 import com.example.halloweenfinder.host_fragments.GuestsListFragment;
-import com.example.halloweenfinder.host_fragments.HostProfileFragment;
+import com.example.halloweenfinder.shared_fragments.HostProfileFragment;
 import com.example.halloweenfinder.host_fragments.PartyCreationFragment;
 import com.example.halloweenfinder.shared_fragments.ConversationFragment;
 import com.example.halloweenfinder.shared_fragments.MapFragment;

@@ -2,19 +2,20 @@ package com.example.halloweenfinder.intro;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-import androidx.annotation.NonNull;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.halloweenfinder.main.GuestHomeActivity;
 import com.example.halloweenfinder.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,13 +32,14 @@ public class SignUpActivity extends AppCompatActivity {
 
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
+        FirebaseAuth.getInstance().setLanguageCode("en");
 
         // Initialize UI elements
         emailEditText = findViewById(R.id.emailEditText);
         passwordEditText = findViewById(R.id.passwordEditText);
         confirmPasswordEditText = findViewById(R.id.confirmPasswordEditText);
         signUpButton = findViewById(R.id.signUpButton);
-        loginRedirectButton = findViewById(R.id.loginRedirectButton); // Add a button to redirect to login
+        loginRedirectButton = findViewById(R.id.loginRedirectButton);
 
         // Set sign-up button click listener
         signUpButton.setOnClickListener(v -> registerUser());
@@ -46,19 +48,31 @@ public class SignUpActivity extends AppCompatActivity {
         loginRedirectButton.setOnClickListener(v -> {
             Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
             startActivity(intent);
-            finish(); // Optionally finish this activity to prevent users from navigating back
+            finish();
         });
     }
+
     private void saveUserToDatabase(FirebaseUser user) {
         String userId = user.getUid(); // Get the user's unique ID
-        String name = emailEditText.getText().toString().split("@")[0]; // Extract name from email as an example
-        Map<String, Object> parties = new HashMap<>(); // Initial empty map of parties
+        String email = user.getEmail(); // Get the user's email address
 
-        // Create a user data map
+        // Extract the username from the email address (before the '@')
+        String userName = "";
+        if (email != null && email.contains("@")) {
+            userName = email.split("@")[0]; // Split the email at '@' and take the first part
+        }
+
+        // Create default fields for the new user
         Map<String, Object> userData = new HashMap<>();
         userData.put("userId", userId);
-        userData.put("name", name);
-        userData.put("parties", parties);
+        userData.put("email", email); // Add email to the user data
+        userData.put("fileURL", ""); // Empty string for file URL
+        userData.put("address", ""); // Empty address
+        userData.put("name", userName); // Set the extracted name
+        userData.put("age", ""); // Empty age
+        userData.put("partiesAttending", new HashMap<>()); // Empty map
+        userData.put("partiesHosting", new HashMap<>()); // Empty map
+        userData.put("partyHistory", new HashMap<>()); // Empty map
 
         // Reference to the Realtime Database
         DatabaseReference databaseRef = FirebaseDatabase.getInstance().getReference("users");
@@ -69,11 +83,15 @@ public class SignUpActivity extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         Toast.makeText(this, "User data saved successfully!", Toast.LENGTH_SHORT).show();
                     } else {
-                        Toast.makeText(this, "Failed to save user data: " + task.getException().getMessage(),
+                        Exception e = task.getException();
+                        Toast.makeText(this, "Failed to save user data: " + (e != null ? e.getMessage() : "Unknown error"),
                                 Toast.LENGTH_SHORT).show();
+                        if (e != null) e.printStackTrace();
                     }
                 });
     }
+
+
 
     private void registerUser() {
         String email = emailEditText.getText().toString().trim();
@@ -93,17 +111,14 @@ public class SignUpActivity extends AppCompatActivity {
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
-                        // Registration success, update UI with the signed-in user's information
                         FirebaseUser user = mAuth.getCurrentUser();
                         if (user != null) {
                             saveUserToDatabase(user);
-                            // Navigate to the main home activity
-                            Intent intent = new Intent(SignUpActivity.this, GuestHomeActivity.class); // Replace with the correct home activity
+                            Intent intent = new Intent(SignUpActivity.this, GuestHomeActivity.class);
                             startActivity(intent);
-                            finish(); // Close the sign-up activity
+                            finish();
                         }
                     } else {
-                        // If registration fails, display a message to the user
                         Toast.makeText(this, "Registration failed: " + task.getException().getMessage(),
                                 Toast.LENGTH_SHORT).show();
                     }
