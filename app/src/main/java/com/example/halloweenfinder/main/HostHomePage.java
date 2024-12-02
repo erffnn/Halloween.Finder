@@ -1,5 +1,6 @@
 package com.example.halloweenfinder.main;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -17,7 +18,7 @@ import com.example.halloweenfinder.shared_fragments.MapFragment;
 
 public class HostHomePage extends AppCompatActivity {
 
-    private LinearLayout partyCreation , guestListButton , profileButton , mapButton, conversationRoomButton;
+    private LinearLayout partyCreation , guestListButton , profileButton , mapButton, conversationRoomButton, guestButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +30,8 @@ public class HostHomePage extends AppCompatActivity {
         profileButton  = findViewById(R.id.hostProfileButton);
         mapButton = findViewById(R.id.mapButton);
         conversationRoomButton = findViewById(R.id.conversationRoomButton);
+        guestButton = findViewById(R.id.guestBtn);
+
 
         loadFragment(new PartyCreationFragment());
 
@@ -65,6 +68,15 @@ public class HostHomePage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 loadFragment(new ConversationFragment());
+            }
+        });
+
+
+        guestButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HostHomePage.this, GuestHomeActivity.class);
+                startActivity(intent);
             }
         });
     }

@@ -144,5 +144,30 @@
                 android:letterSpacing="0.05" />
         </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/guestBtn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <ImageView
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:src="@drawable/guests_logo"
+                android:contentDescription="Map" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="guest page"
+                android:textColor="@android:color/white"
+                android:textSize="12sp"
+                android:paddingTop="4dp"
+                android:fontFamily="sans-serif-medium"
+                android:letterSpacing="0.05" />
+        </LinearLayout>
+
     </LinearLayout>
 </LinearLayout>

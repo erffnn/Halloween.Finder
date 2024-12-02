@@ -54,51 +54,51 @@ public class HostProfileFragment extends Fragment {
         databaseReference = FirebaseDatabase.getInstance().getReference("users");
 
         // Fetch user data
-        fetchUserData();
+        //fetchUserData();
 
         // Set button listeners
-        buttonCancel.setOnClickListener(v -> cancelChanges());
+        //buttonCancel.setOnClickListener(v -> cancelChanges());
         buttonSave.setOnClickListener(v -> saveChanges());
 
         return view;
     }
 
-    private void fetchUserData() {
-        if (currentUser != null) {
-            String userId = currentUser.getUid();
-            databaseReference.child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    if (snapshot.exists()) {
-                        String name = snapshot.child("name").getValue(String.class);
-                        String email = currentUser.getEmail();
-                        Long age = snapshot.child("age").getValue(Long.class);
-                        String address = snapshot.child("address").getValue(String.class); // Address field
+//    private void fetchUserData() {
+//        if (currentUser != null) {
+//            String userId = currentUser.getUid();
+//            databaseReference.child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
+//                @Override
+//                public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                    if (snapshot.exists()) {
+//                        String name = snapshot.child("name").getValue(String.class);
+//                        String email = currentUser.getEmail();
+//                        Long age = snapshot.child("age").getValue(Long.class);
+//                        String address = snapshot.child("address").getValue(String.class); // Address field
+//
+//                        // Set fetched data to UI elements
+//                        editTextName.setText(name != null ? name : "");
+//                        editTextAge.setText(age != null ? String.valueOf(age) : "");
+//                        editTextAddress.setText(address != null ? address : "");
+//                        textEmail.setText(email != null ? email : "No email available");
+//                    } else {
+//                        Toast.makeText(getActivity(), "User data not found", Toast.LENGTH_SHORT).show();
+//                    }
+//                }
+//
+//                @Override
+//                public void onCancelled(@NonNull DatabaseError error) {
+//                    Toast.makeText(getActivity(), "Error fetching user data: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+//                }
+//            });
+//        } else {
+//            Toast.makeText(getActivity(), "User not authenticated", Toast.LENGTH_SHORT).show();
+//        }
+//    }
 
-                        // Set fetched data to UI elements
-                        editTextName.setText(name != null ? name : "");
-                        editTextAge.setText(age != null ? String.valueOf(age) : "");
-                        editTextAddress.setText(address != null ? address : "");
-                        textEmail.setText(email != null ? email : "No email available");
-                    } else {
-                        Toast.makeText(getActivity(), "User data not found", Toast.LENGTH_SHORT).show();
-                    }
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-                    Toast.makeText(getActivity(), "Error fetching user data: " + error.getMessage(), Toast.LENGTH_SHORT).show();
-                }
-            });
-        } else {
-            Toast.makeText(getActivity(), "User not authenticated", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    private void cancelChanges() {
-        fetchUserData(); // Reload user data to discard changes
-        Toast.makeText(getActivity(), "Changes canceled", Toast.LENGTH_SHORT).show();
-    }
+//    private void cancelChanges() {
+//        fetchUserData(); // Reload user data to discard changes
+//        Toast.makeText(getActivity(), "Changes canceled", Toast.LENGTH_SHORT).show();
+//    }
 
     private void saveChanges() {
         String name = editTextName.getText().toString().trim();
