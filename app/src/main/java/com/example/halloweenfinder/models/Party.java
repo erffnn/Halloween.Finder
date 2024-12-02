@@ -5,18 +5,26 @@ public class Party {
     private String partyName;
     private String partyDescription;
     private String partyDate;
+    private String address; // New field
+    private String hostName; // New field
+    private String time; // New field
 
-    public Party(){
-
+    // Default constructor (required for Firebase)
+    public Party() {
     }
 
-    public Party(String partyId, String partyName, String partyDescription, String partyDate) {
+    // Parameterized constructor
+    public Party(String partyId, String partyName, String partyDescription, String partyDate, String address, String hostName, String time) {
         this.partyId = partyId;
         this.partyName = partyName;
         this.partyDescription = partyDescription;
         this.partyDate = partyDate;
+        this.address = address;
+        this.hostName = hostName;
+        this.time = time;
     }
 
+    // Getters and Setters
     public String getPartyId() {
         return partyId;
     }
@@ -47,5 +55,29 @@ public class Party {
 
     public void setPartyDate(String partyDate) {
         this.partyDate = partyDate;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getHostName() {
+        return hostName;
+    }
+
+    public void setHostName(String hostName) {
+        this.hostName = hostName;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
     }
 }

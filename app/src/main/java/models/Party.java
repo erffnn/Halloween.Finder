@@ -39,4 +39,20 @@ public class Party {
     public void setDate(String date) {
         this.date = date;
     }
+
+    public void setPartyId(String partyId) {
+    }
+
+    public void setDescription(String description) {
+    }
+
+    public void setHostName(String hostName) {
+    }
+
+    public void setAddress(String address) {
+    }
+
+    public void setTime(String time) {
+        
+    }
 }
