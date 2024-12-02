@@ -1,5 +1,6 @@
 package com.example.halloweenfinder.shared_fragments;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,12 +28,13 @@ public class HostProfileFragment extends Fragment {
 
     private ImageView imgProfile;
     private TextView textEmail;
-    private EditText editTextName, editTextAge;
+    private EditText editTextName, editTextAge, editTextAddress;
     private Button buttonCancel, buttonSave;
 
     private DatabaseReference databaseReference;
     private FirebaseUser currentUser;
 
+    @SuppressLint("MissingInflatedId")
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -40,9 +42,10 @@ public class HostProfileFragment extends Fragment {
 
         // Initialize views
         imgProfile = view.findViewById(R.id.img_profile);
-        textEmail = view.findViewById(R.id.textEmail);
+        textEmail = view.findViewById(R.id.editTextEmail);
         editTextName = view.findViewById(R.id.editTextName);
         editTextAge = view.findViewById(R.id.editTextAge);
+        editTextAddress = view.findViewById(R.id.editTextAddress);
         buttonCancel = view.findViewById(R.id.buttonCancel);
         buttonSave = view.findViewById(R.id.buttonSave);
 
@@ -69,10 +72,13 @@ public class HostProfileFragment extends Fragment {
                     if (snapshot.exists()) {
                         String name = snapshot.child("name").getValue(String.class);
                         String email = currentUser.getEmail();
-                        long age = snapshot.child("age").getValue(Long.class); // Assuming age is stored as a number
+                        Long age = snapshot.child("age").getValue(Long.class);
+                        String address = snapshot.child("address").getValue(String.class); // Address field
 
+                        // Set fetched data to UI elements
                         editTextName.setText(name != null ? name : "");
-                        editTextAge.setText(String.valueOf(age));
+                        editTextAge.setText(age != null ? String.valueOf(age) : "");
+                        editTextAddress.setText(address != null ? address : "");
                         textEmail.setText(email != null ? email : "No email available");
                     } else {
                         Toast.makeText(getActivity(), "User data not found", Toast.LENGTH_SHORT).show();
@@ -97,8 +103,9 @@ public class HostProfileFragment extends Fragment {
     private void saveChanges() {
         String name = editTextName.getText().toString().trim();
         String ageStr = editTextAge.getText().toString().trim();
+        String address = editTextAddress.getText().toString().trim();
 
-        if (name.isEmpty() || ageStr.isEmpty()) {
+        if (name.isEmpty() || ageStr.isEmpty() || address.isEmpty()) {
             Toast.makeText(getActivity(), "Please fill in all fields", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -110,9 +117,10 @@ public class HostProfileFragment extends Fragment {
                 String userId = currentUser.getUid();
                 DatabaseReference userRef = databaseReference.child(userId);
 
-                // Save the changes
+                // Save the changes to the database
                 userRef.child("name").setValue(name);
                 userRef.child("age").setValue(age);
+                userRef.child("address").setValue(address); // Save address field
 
                 Toast.makeText(getActivity(), "Changes saved successfully", Toast.LENGTH_SHORT).show();
             } else {
