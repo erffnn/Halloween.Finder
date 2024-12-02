@@ -117,5 +117,30 @@
                 android:letterSpacing="0.05" />
         </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/hostButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <ImageView
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:src="@drawable/prfile_logi"
+                android:contentDescription="Map" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hosting"
+                android:textColor="@android:color/white"
+                android:textSize="12sp"
+                android:paddingTop="4dp"
+                android:fontFamily="sans-serif-medium"
+                android:letterSpacing="0.05" />
+        </LinearLayout>
+
     </LinearLayout>
 </LinearLayout>
