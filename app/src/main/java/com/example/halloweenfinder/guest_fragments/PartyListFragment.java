@@ -51,7 +51,8 @@ public class PartyListFragment extends Fragment {
         currentUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         // Initialize Firebase Database Reference for current user
-        userDatabaseRef = FirebaseDatabase.getInstance().getReference("users").child(currentUserId);
+
+        userDatabaseRef = FirebaseDatabase.getInstance().getReference("Parties");
 
         // Initialize party list and adapter
         partyList = new ArrayList<>();
@@ -65,7 +66,8 @@ public class PartyListFragment extends Fragment {
     }
 
     private void fetchAttendingParties() {
-        userDatabaseRef.child("attendingParties").addListenerForSingleValueEvent(new ValueEventListener() {
+
+        userDatabaseRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (!snapshot.exists()) {
