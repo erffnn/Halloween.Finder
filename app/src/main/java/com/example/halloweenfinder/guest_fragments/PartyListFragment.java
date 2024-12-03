@@ -93,5 +93,5 @@ public class PartyListFragment extends Fragment {
     }
 }
 
-}
+
 

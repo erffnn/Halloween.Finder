@@ -29,7 +29,6 @@ public class GuestsListFragment extends Fragment {
     private GuestAdapter guestAdapter;
     private ArrayList<Guest> guestList;
     private DatabaseReference databaseReference;
-    private String partyId;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -44,19 +43,10 @@ public class GuestsListFragment extends Fragment {
         guestAdapter = new GuestAdapter(guestList);
         recyclerGuests.setAdapter(guestAdapter);
 
-        // Get the party ID from arguments
-        if (getArguments() != null) {
-            partyId = getArguments().getString("partyId");
-            Log.d("GuestsListFragment", "Party ID: " + partyId);
-        } else {
-            Log.e("GuestsListFragment", "Party ID is missing!");
-            return view; // Exit early if no partyId is provided
-        }
+        // Firebase reference for all parties
+        databaseReference = FirebaseDatabase.getInstance().getReference("Parties");
 
-        // Firebase reference for the selected party's guests
-        databaseReference = FirebaseDatabase.getInstance().getReference("Parties").child(partyId);
-
-        // Fetch guests from Firebase
+        // Fetch guests from Firebase for all parties
         fetchGuests();
 
         return view;
@@ -65,30 +55,44 @@ public class GuestsListFragment extends Fragment {
     private void fetchGuests() {
         guestList.clear();
 
-        databaseReference.child("guests").addValueEventListener(new ValueEventListener() {
+        // Fetch all parties
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Log.d("GuestsListFragment", "Snapshot received: " + snapshot.toString());
 
                 if (!snapshot.exists()) {
-                    Log.e("GuestsListFragment", "No guests found for party ID: " + partyId);
+                    Log.e("GuestsListFragment", "No parties found.");
                     guestAdapter.notifyDataSetChanged();
                     return;
                 }
 
                 guestList.clear();
 
-                for (DataSnapshot guestSnapshot : snapshot.getChildren()) {
-                    String guestId = guestSnapshot.getKey();
-                    String guestEmail = guestSnapshot.getValue(String.class);
+                // Iterate through each party
+                for (DataSnapshot partySnapshot : snapshot.getChildren()) {
+                    String partyId = partySnapshot.child("partyId").getValue(String.class);
+                    String partyName = partySnapshot.child("partyName").getValue(String.class);
+                    Log.d("GuestsListFragment", "Party ID: " + partyId + ", Party Name: " + partyName);
 
-                    Log.d("GuestsListFragment", "Guest ID: " + guestId + ", Email: " + guestEmail);
+                    // Check if the guests node exists
+                    DataSnapshot guestsSnapshot = partySnapshot.child("guests");
+                    if (guestsSnapshot.exists()) {
+                        for (DataSnapshot guestSnapshot : guestsSnapshot.getChildren()) {
+                            String guestId = guestSnapshot.getKey(); // This is the guest's userId
+                            String guestEmail = guestSnapshot.getValue(String.class); // This is the guest's email
 
-                    if (guestId != null && guestEmail != null) {
-                        guestList.add(new Guest(guestId, guestEmail));
+                            Log.d("GuestsListFragment", "Guest ID: " + guestId + ", Email: " + guestEmail);
+
+                            // Add guest to list
+                            if (guestId != null && guestEmail != null) {
+                                guestList.add(new Guest(guestId, guestEmail));
+                            }
+                        }
                     }
                 }
 
+                // Notify the adapter that the data has changed
                 guestAdapter.notifyDataSetChanged();
             }
 
@@ -98,5 +102,4 @@ public class GuestsListFragment extends Fragment {
             }
         });
     }
-
 }
