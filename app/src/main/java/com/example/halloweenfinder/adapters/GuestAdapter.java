@@ -21,30 +21,39 @@ public class GuestAdapter extends RecyclerView.Adapter<GuestAdapter.GuestViewHol
         this.guestList = guestList;
     }
 
-    @NonNull
-    @Override
-    public GuestViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.host_guest_list_item, parent, false);
-        return new GuestViewHolder(view);
-    }
-
-    @Override
-    public void onBindViewHolder(@NonNull GuestViewHolder holder, int position) {
-        Guest guest = guestList.get(position);
-        holder.guestEmail.setText(guest.getGuestEmail());
-    }
-
-    @Override
-    public int getItemCount() {
-        return guestList == null ? 0 : guestList.size();
-    }
-
+    // ViewHolder class to hold references to the TextViews
     static class GuestViewHolder extends RecyclerView.ViewHolder {
+        TextView partyName;
+        TextView guestUserId;
         TextView guestEmail;
 
         public GuestViewHolder(@NonNull View itemView) {
             super(itemView);
-            guestEmail = itemView.findViewById(R.id.guestNameTextView); // Update to use correct ID
+            partyName = itemView.findViewById(R.id.partyname);
+            guestUserId = itemView.findViewById(R.id.guest_user_id);
         }
+    }
+
+    @NonNull
+    @Override
+    public GuestViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        // Inflate the layout for each item and return a new ViewHolder
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.host_guest_list_item, parent, false);
+        return new GuestViewHolder(view);
+    }
+
+    public void onBindViewHolder(@NonNull GuestViewHolder holder, int position) {
+        Guest guest = guestList.get(position);
+
+        // Set the correct data for each guest
+        holder.partyName.setText("user id: " + guest.getPartyName());
+        holder.guestUserId.setText("email: " + guest.getGuestId());
+
+    }
+
+
+    @Override
+    public int getItemCount() {
+        return guestList == null ? 0 : guestList.size();
     }
 }
