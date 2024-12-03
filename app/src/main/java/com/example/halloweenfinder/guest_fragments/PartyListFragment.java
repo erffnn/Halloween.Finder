@@ -44,45 +44,16 @@ public class PartyListFragment extends Fragment {
         partyRecyclerView = view.findViewById(R.id.partyRecyclerView);
         partyRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        // Initialize Firebase Database Reference for "Parties"
-        partiesDatabaseRef = FirebaseDatabase.getInstance().getReference("Parties");
 
         // Initialize party list and adapter
         partyList = new ArrayList<>();
         partyAdapter = new PartyAdapter(partyList);
         partyRecyclerView.setAdapter(partyAdapter);
 
-        // Fetch party list
-        fetchPartyList();
+
 
         return view;
     }
 
-    private void fetchPartyList() {
-        partiesDatabaseRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (!snapshot.exists()) {
-                    // Show a message if there are no parties
-                    Toast.makeText(getContext(), "No parties found.", Toast.LENGTH_SHORT).show();
-                } else {
-                    // Populate the party list
-                    partyList.clear();
-                    for (DataSnapshot partySnapshot : snapshot.getChildren()) {
-                        Party party = partySnapshot.getValue(Party.class);
-                        if (party != null) {
-                            partyList.add(party);
-                        }
-                    }
-                    partyAdapter.notifyDataSetChanged();
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(getContext(), "Failed to load parties: " + error.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
 
 }
