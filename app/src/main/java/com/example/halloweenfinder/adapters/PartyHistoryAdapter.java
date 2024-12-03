@@ -35,7 +35,7 @@ public class PartyHistoryAdapter extends RecyclerView.Adapter<PartyHistoryAdapte
         Party party = partyList.get(position);
 
         holder.txtPartyName.setText(party.getName());
-        holder.txtPartyDate.setText(party.getDate());
+        holder.txtPartyDate.setText(party.getTime());
 
         holder.btnReviewParty.setOnClickListener(v -> {
             // Handle review button click (e.g., open a dialog or navigate to a review fragment)

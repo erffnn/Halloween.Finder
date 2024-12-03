@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.halloweenfinder.R;
 import com.example.halloweenfinder.adapters.PartyAdapter;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -22,7 +21,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Map;
 
 import models.Party;
 
@@ -31,8 +29,7 @@ public class PartyListFragment extends Fragment {
     private RecyclerView partyRecyclerView;
     private PartyAdapter partyAdapter;
     private ArrayList<Party> partyList;
-    private DatabaseReference userDatabaseRef;
-    private String currentUserId;
+    private DatabaseReference partiesDatabaseRef;
 
     public PartyListFragment() {
         // Required empty public constructor
@@ -47,56 +44,45 @@ public class PartyListFragment extends Fragment {
         partyRecyclerView = view.findViewById(R.id.partyRecyclerView);
         partyRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        // Get current user ID
-        currentUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-
-        // Initialize Firebase Database Reference for current user
-
-        userDatabaseRef = FirebaseDatabase.getInstance().getReference("Parties");
+        // Initialize Firebase Database Reference for Parties
+        partiesDatabaseRef = FirebaseDatabase.getInstance().getReference("Parties");
 
         // Initialize party list and adapter
         partyList = new ArrayList<>();
         partyAdapter = new PartyAdapter(partyList);
         partyRecyclerView.setAdapter(partyAdapter);
 
-        // Fetch attending parties
-        fetchAttendingParties();
+        // Fetch parties from Firebase
+        fetchParties();
 
         return view;
     }
 
-    private void fetchAttendingParties() {
-
-        userDatabaseRef.addListenerForSingleValueEvent(new ValueEventListener() {
+    private void fetchParties() {
+        partiesDatabaseRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (!snapshot.exists()) {
-                    // Show a message if attendingParties does not exist
-                    Toast.makeText(getContext(), "You don't have any attending parties.", Toast.LENGTH_SHORT).show();
-                } else {
-                    // Fetch attending parties
-                    partyList.clear();
-                    for (DataSnapshot partySnapshot : snapshot.getChildren()) {
-                        String partyId = partySnapshot.getKey();
-                        Map<String, String> partyData = (Map<String, String>) partySnapshot.getValue();
+                partyList.clear(); // Clear the list before adding new data
+                for (DataSnapshot partySnapshot : snapshot.getChildren()) {
+                    Party party = new Party();
 
-                        if (partyData != null) {
-                            Party party = new Party();
-                            party.setPartyId(partyId);
-                            party.setAddress(partyData.get("address"));
-                            party.setHostName(partyData.get("hostName"));
-                            party.setTime(partyData.get("time"));
-                            party.setDescription(partyData.get("description"));
-                            partyList.add(party);
-                        }
-                    }
-                    partyAdapter.notifyDataSetChanged();
+                    // Fetch party details from snapshot
+                    party.setPartyId(partySnapshot.child("partyId").getValue(String.class));
+                    party.setName(partySnapshot.child("partyName").getValue(String.class));
+                    party.setDescription(partySnapshot.child("partyDescription").getValue(String.class));
+                    party.setAddress(partySnapshot.child("partyLocation").getValue(String.class));
+                    party.setTime(partySnapshot.child("partyDate").getValue(String.class));
+
+                    partyList.add(party);
                 }
+
+                // Notify adapter of data change
+                partyAdapter.notifyDataSetChanged();
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(getContext(), "Failed to load attending parties: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Failed to load parties: " + error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
