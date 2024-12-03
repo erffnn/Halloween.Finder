@@ -44,19 +44,24 @@ public class PartyListFragment extends Fragment {
         partyRecyclerView = view.findViewById(R.id.partyRecyclerView);
         partyRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
+
         // Initialize Firebase Database Reference for Parties
         partiesDatabaseRef = FirebaseDatabase.getInstance().getReference("Parties");
+
 
         // Initialize party list and adapter
         partyList = new ArrayList<>();
         partyAdapter = new PartyAdapter(partyList);
         partyRecyclerView.setAdapter(partyAdapter);
 
-        // Fetch parties from Firebase
+
+      // Fetch parties from Firebase
         fetchParties();
+
 
         return view;
     }
+
 
     private void fetchParties() {
         partiesDatabaseRef.addValueEventListener(new ValueEventListener() {
@@ -86,4 +91,4 @@ public class PartyListFragment extends Fragment {
             }
         });
     }
-}
+
