@@ -9,7 +9,6 @@ public class Party {
     private String hostName; // New field
     private String time; // New field
 
-    // Default constructor (required for Firebase)
     public Party() {
     }
 
