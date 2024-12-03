@@ -74,7 +74,7 @@ public class SignUpActivity extends AppCompatActivity {
         userData.put("partiesHosting", new HashMap<>()); // Empty map
         userData.put("partyHistory", new HashMap<>()); // Empty map
 
-        // Reference to the Realtime Database
+      
         DatabaseReference databaseRef = FirebaseDatabase.getInstance().getReference("users");
 
         // Save user data
