@@ -4,10 +4,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.halloweenfinder.R;
 import com.example.halloweenfinder.models.Guest;
+
 import java.util.ArrayList;
 
 public class GuestAdapter extends RecyclerView.Adapter<GuestAdapter.GuestViewHolder> {
@@ -28,20 +31,20 @@ public class GuestAdapter extends RecyclerView.Adapter<GuestAdapter.GuestViewHol
     @Override
     public void onBindViewHolder(@NonNull GuestViewHolder holder, int position) {
         Guest guest = guestList.get(position);
-        holder.guestName.setText(guest.getGuestName());
+        holder.guestEmail.setText(guest.getGuestEmail());
     }
 
     @Override
     public int getItemCount() {
-        return guestList.size();
+        return guestList == null ? 0 : guestList.size();
     }
 
     static class GuestViewHolder extends RecyclerView.ViewHolder {
-        TextView guestName;
+        TextView guestEmail;
 
         public GuestViewHolder(@NonNull View itemView) {
             super(itemView);
-            guestName = itemView.findViewById(R.id.guestNameTextView);
+            guestEmail = itemView.findViewById(R.id.guestNameTextView); // Update to use correct ID
         }
     }
 }

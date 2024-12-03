@@ -2,15 +2,11 @@ package com.example.halloweenfinder.models;
 
 public class Guest {
     private String guestId;
-    private String guestName;
+    private String guestEmail;
 
-    public Guest(){
-
-    }
-
-    public Guest(String guestId, String guestName) {
+    public Guest(String guestId, String guestEmail) {
         this.guestId = guestId;
-        this.guestName = guestName;
+        this.guestEmail = guestEmail;
     }
 
     public String getGuestId() {
@@ -21,11 +17,11 @@ public class Guest {
         this.guestId = guestId;
     }
 
-    public String getGuestName() {
-        return guestName;
+    public String getGuestEmail() {
+        return guestEmail;
     }
 
-    public void setGuestName(String guestName) {
-        this.guestName = guestName;
+    public void setGuestEmail(String guestEmail) {
+        this.guestEmail = guestEmail;
     }
 }
