@@ -11,7 +11,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.halloweenfinder.R;
 import com.example.halloweenfinder.host_fragments.GuestsListFragment;
-import com.example.halloweenfinder.shared_fragments.HostProfileFragment;
+import com.example.halloweenfinder.shared_fragments.ProfileFragment;
 import com.example.halloweenfinder.host_fragments.PartyCreationFragment;
 import com.example.halloweenfinder.shared_fragments.ConversationFragment;
 import com.example.halloweenfinder.shared_fragments.MapFragment;
@@ -53,7 +53,7 @@ public class HostHomePage extends AppCompatActivity {
         profileButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loadFragment(new HostProfileFragment());
+                loadFragment(new ProfileFragment());
             }
         });
 

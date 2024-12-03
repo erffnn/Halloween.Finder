@@ -9,6 +9,7 @@ public class Party {
     private String hostName; // New field
     private String time; // New field
 
+
     public Party() {
     }
 

@@ -23,6 +23,7 @@ import com.google.android.libraries.places.widget.listener.PlaceSelectionListene
 import java.util.Arrays;
 import java.util.HashMap;
 
+
 public class PartyCreationFragment extends Fragment {
 
     private EditText editPartyName, editPartyDate, editPartyDescription;
