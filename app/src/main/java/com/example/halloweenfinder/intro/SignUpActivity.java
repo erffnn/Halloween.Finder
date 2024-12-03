@@ -69,7 +69,7 @@ public class SignUpActivity extends AppCompatActivity {
         userData.put("fileURL", ""); // Empty string for file URL
         userData.put("address", ""); // Empty address
         userData.put("name", userName); // Set the extracted name
-        userData.put("age", ""); // Empty age
+        userData.put("age", 0); // Empty age
         userData.put("partiesAttending", new HashMap<>()); // Empty map
         userData.put("partiesHosting", new HashMap<>()); // Empty map
         userData.put("partyHistory", new HashMap<>()); // Empty map

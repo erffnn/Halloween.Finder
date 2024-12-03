@@ -55,7 +55,7 @@ public class PartyListFragment extends Fragment {
         partyRecyclerView.setAdapter(partyAdapter);
 
 
-      // Fetch parties from Firebase
+        // Fetch parties from Firebase
         fetchParties();
 
 
@@ -91,4 +91,5 @@ public class PartyListFragment extends Fragment {
             }
         });
     }
+}
 
