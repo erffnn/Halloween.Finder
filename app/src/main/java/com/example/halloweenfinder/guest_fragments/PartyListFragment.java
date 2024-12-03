@@ -45,15 +45,50 @@ public class PartyListFragment extends Fragment {
         partyRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
 
+        // Initialize Firebase Database Reference for Parties
+        partiesDatabaseRef = FirebaseDatabase.getInstance().getReference("Parties");
+
+
         // Initialize party list and adapter
         partyList = new ArrayList<>();
         partyAdapter = new PartyAdapter(partyList);
         partyRecyclerView.setAdapter(partyAdapter);
 
 
+      // Fetch parties from Firebase
+        fetchParties();
+
 
         return view;
     }
 
 
-}
+    private void fetchParties() {
+        partiesDatabaseRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                partyList.clear(); // Clear the list before adding new data
+                for (DataSnapshot partySnapshot : snapshot.getChildren()) {
+                    Party party = new Party();
+
+                    // Fetch party details from snapshot
+                    party.setPartyId(partySnapshot.child("partyId").getValue(String.class));
+                    party.setName(partySnapshot.child("partyName").getValue(String.class));
+                    party.setDescription(partySnapshot.child("partyDescription").getValue(String.class));
+                    party.setAddress(partySnapshot.child("partyLocation").getValue(String.class));
+                    party.setTime(partySnapshot.child("partyDate").getValue(String.class));
+
+                    partyList.add(party);
+                }
+
+                // Notify adapter of data change
+                partyAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(getContext(), "Failed to load parties: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+

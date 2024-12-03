@@ -1,21 +1,27 @@
 package models;
 
 public class Party {
+    private String partyId;
     private String name;
-    private String location;
-    private String date;
+    private String description;
+    private String address; // Field for address
+    private String time;    // Field for party date
+    private String location; // New field for location
 
-    // Empty constructor (required for Firebase)
-    public Party() {}
-
-    // Constructor
-    public Party(String name, String location, String date) {
-        this.name = name;
-        this.location = location;
-        this.date = date;
+    public Party() {
+        // Default constructor required for Firebase
     }
 
-    // Getters and Setters
+    // Getter and Setter for partyId
+    public String getPartyId() {
+        return partyId;
+    }
+
+    public void setPartyId(String partyId) {
+        this.partyId = partyId;
+    }
+
+    // Getter and Setter for name
     public String getName() {
         return name;
     }
@@ -24,35 +30,39 @@ public class Party {
         this.name = name;
     }
 
+    // Getter and Setter for description
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    // Getter and Setter for address
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    // Getter and Setter for time (party date)
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    // Getter and Setter for location
     public String getLocation() {
         return location;
     }
 
     public void setLocation(String location) {
         this.location = location;
-    }
-
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    public void setPartyId(String partyId) {
-    }
-
-    public void setDescription(String description) {
-    }
-
-    public void setHostName(String hostName) {
-    }
-
-    public void setAddress(String address) {
-    }
-
-    public void setTime(String time) {
-        
     }
 }

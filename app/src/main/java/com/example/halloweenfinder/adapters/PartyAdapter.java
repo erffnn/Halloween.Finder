@@ -32,9 +32,11 @@ public class PartyAdapter extends RecyclerView.Adapter<PartyAdapter.PartyViewHol
     public void onBindViewHolder(@NonNull PartyViewHolder holder, int position) {
         Party party = partyList.get(position);
         holder.partyName.setText(party.getName());
-        holder.partyLocation.setText(party.getLocation());
-        holder.partyDate.setText(party.getDate());
+        holder.partyLocation.setText(party.getAddress()); // Updated to match Party class
+        holder.partyDate.setText(party.getTime()); // Updated to match Party class
+        holder.partyDescription.setText(party.getDescription());
     }
+
 
     @Override
     public int getItemCount() {
@@ -42,13 +44,14 @@ public class PartyAdapter extends RecyclerView.Adapter<PartyAdapter.PartyViewHol
     }
 
     public static class PartyViewHolder extends RecyclerView.ViewHolder {
-        TextView partyName, partyLocation, partyDate;
+        TextView partyName, partyLocation, partyDate, partyDescription;
 
         public PartyViewHolder(@NonNull View itemView) {
             super(itemView);
             partyName = itemView.findViewById(R.id.partyNameTextView);
             partyLocation = itemView.findViewById(R.id.partyLocationTextView);
             partyDate = itemView.findViewById(R.id.partyDateTextView);
+            partyDescription = itemView.findViewById(R.id.partyDescriptionTextView);
         }
     }
 }
